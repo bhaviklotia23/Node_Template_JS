@@ -12,13 +12,13 @@ app.use(cookieParser());
 const bodyParser = require("body-parser");
 
 // const errorMiddleware = require("./src/middleware/error");
-// const user = require("./src/user/user.routes");
+const user = require("./src/user/user.routes");
+const { hostname } = require("os");
 
 dotenv.config();
 
 // eslint-disable-next-line no-undef
 const PORT = parseInt(process.env.PORT, 10);
-const HOST = process.env.HOST || "localhost";
 
 app.use(helmet());
 const corsOption = {
@@ -28,10 +28,10 @@ const corsOption = {
 app.use(cors(corsOption));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use("/api/v1", user);
+app.use("/", user);
 // app.use(errorMiddleware);
 
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
   db();
-  console.log(`Listening on port http://${HOST}:${PORT}`);
+  console.log(`Listening on port http://:${hostname}`);
 });

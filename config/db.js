@@ -1,4 +1,3 @@
-//all app config here
 const mongoose = require("mongoose");
 
 exports.db = async () => {
